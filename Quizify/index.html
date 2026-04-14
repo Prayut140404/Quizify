@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamPortal Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="role-selection" class="screen">
+            <h1>Exam Portal</h1>
+            <div class="role-grid">
+                <button onclick="showScreen('admin-login')" class="btn-primary">Admin Panel</button>
+                <button onclick="startStudentSession()" class="btn-secondary">Student Portal</button>
+            </div>
+        </div>
+
+        <div id="admin-login" class="screen hide">
+            <div class="card">
+                <h2>Admin Access</h2>
+                <input type="password" id="admin-pass" placeholder="Enter Password (admin123)">
+                <button onclick="adminLogin()">Login</button>
+                <button onclick="showScreen('role-selection')" class="btn-text">Back</button>
+            </div>
+        </div>
+
+        <div id="admin-dashboard" class="screen hide">
+            <header>
+                <h2>Admin Dashboard</h2>
+                <button onclick="showScreen('role-selection')">Logout</button>
+            </header>
+            
+            <div class="admin-grid">
+                <div class="add-q-form card">
+                    <h3>Add New Question</h3>
+                    <input type="text" id="q-text" placeholder="Question Text">
+                    <input type="text" class="opt" placeholder="Option 1">
+                    <input type="text" class="opt" placeholder="Option 2">
+                    <input type="text" class="opt" placeholder="Option 3">
+                    <input type="text" class="opt" placeholder="Option 4">
+                    <select id="q-correct">
+                        <option value="0">Option 1 is Correct</option>
+                        <option value="1">Option 2 is Correct</option>
+                        <option value="2">Option 3 is Correct</option>
+                        <option value="3">Option 4 is Correct</option>
+                    </select>
+                    <button onclick="saveQuestion()" class="btn-primary">Add Question</button>
+                </div>
+
+                <div class="q-list card">
+                    <h3>Current Questions</h3>
+                    <div id="admin-q-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="student-panel" class="screen hide">
+            <div class="exam-container">
+                <div class="exam-header">
+                    <span id="timer">00:00</span>
+                    <span id="q-count">Question 1/1</span>
+                </div>
+                <div id="exam-q-area"></div>
+                <div class="exam-nav">
+                    <button id="prev-btn" onclick="move(-1)">Previous</button>
+                    <button id="next-btn" onclick="move(1)">Next</button>
+                    <button id="submit-btn" onclick="finishExam()" class="btn-finish">Submit Exam</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-screen" class="screen hide">
+            <div class="card">
+                <h1>Result Summary</h1>
+                <div class="score-circle">
+                    <span id="res-percent">0%</span>
+                </div>
+                <p id="res-raw">Score: 0/0</p>
+                <button onclick="location.reload()" class="btn-primary">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
